@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persija Jakarta - Macan Kemayoran</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d0a0a 100%);
+            color: #fff;
+        }
+
+        /* Banner */
+        .banner {
+            background: linear-gradient(135deg, #d32f2f 0%, #ff6f00 100%);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .banner h1 {
+            font-size: 3em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .banner p {
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            background: #b71c1c;
+            padding: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            background: #ff6f00;
+            transform: translateY(-2px);
+        }
+
+        nav ul li a.active {
+            background: #d32f2f;
+        }
+
+        /* Content */
+        .content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card h2 {
+            color: #ff6f00;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #ff6f00;
+            padding-bottom: 10px;
+        }
+
+        .card p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 2px solid #ff6f00;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #d32f2f 0%, #ff6f00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+        }
+
+        .gallery-item p {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ff6f00;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff6f00;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1em;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #d32f2f 0%, #ff6f00 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #d32f2f 0%, #ff6f00 100%);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 1.1em;
+        }
+
+        /* Clock */
+        #clock {
+            background: rgba(255, 111, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border: 2px solid #ff6f00;
+        }
+
+        /* Footer */
+        footer {
+            background: #b71c1c;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.3);
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: #ff6f00;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 2em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li a {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner -->
+    <div class="banner">
+        <h1>⚽ PERSIJA JAKARTA ⚽</h1>
+        <p>"Macan Kemayoran - Kebanggaan Jakarta"</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#" class="nav-link active" data-page="home">Beranda</a></li>
+            <li><a href="#" class="nav-link" data-page="sejarah">Sejarah</a></li>
+            <li><a href="#" class="nav-link" data-page="galeri">Galeri</a></li>
+            <li><a href="#" class="nav-link" data-page="member">Daftar Member</a></li>
+        </ul>
+    </nav>
+
+    <!-- Clock -->
+    <div class="content">
+        <div id="clock"></div>
+        
+        <!-- Content Area -->
+        <div id="contentArea"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+        <p><strong>Copyright © 2026 Persija Jakarta</strong></p>
+        <p>Nama: [Muhammad Danial Alief Awwaluddin] | NIM: [251011700813] | Kelas: [01SIFP016]</p>
+        <p>Persija Jakarta Sang Macan Kemayoran</p>
+    </footer>
+
+    <script>
+        // Clock Function
+        function updateClock() {
+            const now = new Date();
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+                          'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            
+            const day = days[now.getDay()];
+            const date = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('clock').innerHTML = 
+                `${day}, ${date} ${month} ${year} | ${hours}:${minutes}:${seconds} WIB`;
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Page Content
+        const pages = {
+            home: `
+                <div class="card">
+                    <h2>Selamat Datang di Website Persija Jakarta</h2>
+                    <p>Persija Jakarta adalah klub sepak bola profesional Indonesia yang berbasis di Jakarta. 
+                    Klub ini didirikan pada tanggal 28 November 1928 dengan nama Voetbalbond Indonesische 
+                    Jacatra (VIJ).</p>
+                    <p>Persija merupakan salah satu klub tersukses di Indonesia dengan berbagai prestasi 
+                    membanggakan di tingkat nasional. Julukan "Macan Kemayoran" melekat karena markas 
+                    klub berada di kawasan Kemayoran, Jakarta Pusat.</p>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3>1928</h3>
+                        <p>Tahun Berdiri</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>11x</h3>
+                        <p>Juara Liga</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>14x</h3>
+                        <p>Juara Piala</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>1M+</h3>
+                        <p>The Jakmania</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Visi dan Misi</h2>
+                    <p><strong>Visi:</strong> Menjadi klub sepak bola terbaik di Indonesia dan Asia Tenggara 
+                    dengan manajemen profesional dan prestasi gemilang.</p>
+                    <p><strong>Misi:</strong> Mengembangkan sepak bola Indonesia, membina pemain muda berbakat, 
+                    dan memberikan hiburan berkualitas bagi seluruh suporter The Jakmania.</p>
+                </div>
+            `,
+            
+            sejarah: `
+                <div class="card">
+                    <h2>Sejarah Persija Jakarta</h2>
+                    <p><strong>Era Awal (1928-1950)</strong></p>
+                    <p>Persija Jakarta didirikan pada 28 November 1928 dengan nama Voetbalbond Indonesische 
+                    Jacatra (VIJ). Klub ini merupakan salah satu klub tertua di Indonesia yang masih aktif 
+                    hingga saat ini.</p>
+                    
+                    <p><strong>Era Keemasan (1970-1990)</strong></p>
+                    <p>Pada era ini, Persija meraih banyak prestasi gemilang termasuk menjuarai Perserikatan 
+                    dan berbagai kompetisi nasional. Era ini menandai kebangkitan Persija sebagai kekuatan 
+                    besar sepak bola Indonesia.</p>
+                    
+                    <p><strong>Era Modern (2000-Sekarang)</strong></p>
+                    <p>Persija terus berkembang dengan manajemen yang lebih profesional. Pada tahun 2018, 
+                    Persija berhasil menjuarai Liga 1 Indonesia setelah puasa gelar yang cukup lama. 
+                    Prestasi ini membuktikan bahwa Macan Kemayoran masih menjadi kekuatan yang diperhitungkan.</p>
+                    
+                    <p><strong>The Jakmania</strong></p>
+                    <p>Suporter Persija yang dikenal dengan sebutan "The Jakmania" adalah salah satu kelompok 
+                    suporter terbesar dan paling fanatik di Indonesia. Mereka selalu setia mendukung tim 
+                    kesayangan dalam setiap pertandingan, baik kandang maupun tandang.</p>
+                </div>
+                
+                <div class="card">
+                    <h2>Prestasi</h2>
+                    <p>🏆 <strong>Liga Indonesia:</strong> 11 kali juara (termasuk Liga 1 2018)</p>
+                    <p>🏆 <strong>Piala Indonesia:</strong> 3 kali juara</p>
+                    <p>🏆 <strong>Piala Gubernur:</strong> 2 kali juara</p>
+                    <p>🏆 <strong>Kompetisi Lainnya:</strong> Berbagai gelar di tingkat regional dan nasional</p>
+                </div>
+            `,
+            
+            galeri: `
+                <div class="card">
+                    <h2>Galeri Foto Persija Jakarta</h2>
+                    <p>Dokumentasi momen-momen bersejarah Persija Jakarta</p>
+                </div>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+  <div style="width:100%;height:600px;
+    background: linear-gradient(135deg,#d32f2f,#ffc100), url('1.jpg');
+    background-blend-mode: overlay; /* Agar gradien dan gambar bisa terlihat bersamaan */
+    background-size: cover;
+    background-position: center;
+    display:flex;align-items:center;justify-content:center;font-size:1em;">
+    <p>Tim Persija Jakarta 2025</p>
+  </div>
+</div>
+                    </div>
+                    <div class="gallery-item">
+  <div style="width:100%;height:600px;
+    background: linear-gradient(135deg,#d32f2f,#ffc100), url('2.jpg');
+    background-blend-mode: overlay; /* Agar gradien dan gambar bisa terlihat bersamaan */
+    background-size: cover;
+    background-position: center;
+    display:flex;align-items:center;justify-content:center;font-size:1em;">
+                        <p>Trofi Liga 1 Indonesia 2018</p>
+                    </div>
+                    <div class="gallery-item">
+  <div style="width:100%;height:600px;
+    background: linear-gradient(135deg,#d32f2f,#ffc100), url('3.jpg');
+    background-blend-mode: overlay; /* Agar gradien dan gambar bisa terlihat bersamaan */
+    background-size: cover;
+    background-position: center;
+    display:flex;align-items:center;justify-content:center;font-size:1em;">
+                        <p>The Jakmania di Stadion</p>
+                    </div>
+                    <div class="gallery-item">
+  <div style="width:100%;height:600px;
+    background: linear-gradient(135deg,#d32f2f,#ffc100), url('4.jpg');
+    background-blend-mode: overlay; /* Agar gradien dan gambar bisa terlihat bersamaan */
+    background-size: cover;
+    background-position: center;
+    display:flex;align-items:center;justify-content:center;font-size:1em;">
+                        <p>Pemain Terbaik Persija</p>
+                    </div>
+                   <div class="gallery-item">
+  <div style="width:100%;height:600px;
+    background: linear-gradient(135deg,#d32f2f,#ffc100), url('5.jpg');
+    background-blend-mode: overlay; /* Agar gradien dan gambar bisa terlihat bersamaan */
+    background-size: cover;
+    background-position: center;
+    display:flex;align-items:center;justify-content:center;font-size:1em;">
+                        <p>Stadion Utama Gelora Bung Karno</p>
+                    </div>
+                    <div class="gallery-item">
+  <div style="width:100%;height:600px;
+    background: linear-gradient(135deg,#d32f2f,#ffc100), url('6.jpg');
+    background-blend-mode: overlay; /* Agar gradien dan gambar bisa terlihat bersamaan */
+    background-size: cover;
+    background-position: center;
+    display:flex;align-items:center;justify-content:center;font-size:1em;">
+                        <p>Jersey Persija Musim Ini</p>
+                    </div>
+                </div>
+            `,
+            
+            member: `
+                <div class="card">
+                    <h2>Formulir Pendaftaran Member The Jakmania</h2>
+                    <p>Bergabunglah bersama jutaan suporter Persija Jakarta di seluruh Indonesia!</p>
+                    
+                    <form id="memberForm" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label>Nama Lengkap *</label>
+                            <input type="text" name="nama" required placeholder="Masukkan nama lengkap">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email" required placeholder="contoh@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Nomor Telepon *</label>
+                            <input type="tel" name="telepon" required placeholder="08xxxxxxxxxx">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Tanggal Lahir *</label>
+                            <input type="date" name="tanggal_lahir" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Jenis Kelamin *</label>
+                            <select name="jenis_kelamin" required>
+                                <option value="">Pilih jenis kelamin</option>
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Alamat Lengkap *</label>
+                            <textarea name="alamat" required placeholder="Masukkan alamat lengkap"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Alasan Bergabung</label>
+                            <textarea name="alasan" placeholder="Ceritakan alasan Anda menjadi bagian dari The Jakmania"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Daftar Sekarang</button>
+                    </form>
+                </div>
+            `
+        };
+
+        // Navigation Function
+        function loadPage(pageName) {
+            document.getElementById('contentArea').innerHTML = pages[pageName];
+            
+            // Update active nav
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageName) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Form Submit Handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            alert('Terima kasih telah mendaftar sebagai member The Jakmania!\n\nData Anda:\n' + 
+                  'Nama: ' + data.nama + '\n' +
+                  'Email: ' + data.email + '\n' +
+                  'Telepon: ' + data.telepon);
+            
+            event.target.reset();
+        }
+
+        // Event Listeners
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                loadPage(e.target.dataset.page);
+            });
+        });
+
+        // Load home page on start
+        loadPage('home');
+    </script>
+</body>
+</html>
